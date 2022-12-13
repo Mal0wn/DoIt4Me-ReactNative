@@ -1,3 +1,4 @@
+
 import  React  from 'react';
 
 import {
@@ -33,13 +34,20 @@ const DATA = [
 
 export const HomeScreen = () => {
 
+let mission : MissionComp
+
+const renderMission = ( mission : any ) => (
+  <MissionComp id={mission.id} title={mission.title} desc={mission.desc} price={40}></MissionComp>
+  );
+
+
   return (
     <ScrollView style={styles.scrollView}>
-       <MissionComp title={'Garder mon chien'} desc={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'} price={40}
-        
-       ></MissionComp>
-       
-       
+       <FlatList
+        data={DATA}
+        renderItem={renderMission}
+        keyExtractor={() => mission.id}
+      />
       </ScrollView>
 
   )

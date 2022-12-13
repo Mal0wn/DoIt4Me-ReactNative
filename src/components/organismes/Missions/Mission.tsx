@@ -14,6 +14,7 @@ import {
 
 
 export interface Props {
+  id : string;
   title: string;
   desc : string;
   price : number;
@@ -21,6 +22,8 @@ export interface Props {
 }
 
 export class MissionComp extends React.Component<Props> {
+  	id!: string;
+
 
 	constructor(props: Props) {
     super(props);
