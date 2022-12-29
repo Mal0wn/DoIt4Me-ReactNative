@@ -1,36 +1,19 @@
 
-import  React  from 'react';
+import  React , {useState, useEffect} from 'react';
+import axios from 'axios';
+import {API_URL} from "./../../utils/globalVar";
 
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  FlatList
+  FlatList, 
+  Text
 } from 'react-native';
 
 import { MissionComp } from '../../components/organismes/Missions/Mission';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const DATA = [
-{
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-    desc : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-    desc : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-    desc : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-  },
-]
 
 export const HomeScreen = () => {
 
@@ -40,15 +23,37 @@ const renderMission = ( mission : any ) => (
   <MissionComp id={mission.id} title={mission.title} desc={mission.desc} price={40}></MissionComp>
   );
 
+  useEffect(() => {
+    getAllMissions();
+  }, []);
+
+  const [itemMission , setItemMission] = useState([]);
+
+  const getAllMissions = async () => {
+    await axios
+        .get(API_URL + "mission", {
+
+         })
+        .then((res) => {
+          setItemMission(res.data)
+        })
+        .catch((err) => console.log(err));
+  };
+
 
   return (
-    <ScrollView style={styles.scrollView}>
-       <FlatList
-        data={DATA}
-        renderItem={renderMission}
-        keyExtractor={() => mission.id}
-      />
+  <SafeAreaView>
+  <Text>HOMESCREEN</Text>
+      <ScrollView style={styles.scrollView}>
+          <FlatList
+            data={itemMission}
+            renderItem={renderMission}
+            keyExtractor={() => mission.id}
+            extraData={setItemMission}
+          />
       </ScrollView>
+  </SafeAreaView>
+    
 
   )
 
