@@ -8,7 +8,8 @@ import {
   StatusBar,
   StyleSheet,
   FlatList, 
-  Text
+  Text,
+  View
 } from 'react-native';
 
 import { MissionComp } from '../../components/organismes/Missions/Mission';
@@ -19,6 +20,7 @@ export const HomeScreen = () => {
 
 let mission : MissionComp
 
+
 const renderMission = ( mission : any ) => (
   <MissionComp id={mission.id} title={mission.title} desc={mission.desc} price={40}></MissionComp>
   );
@@ -27,6 +29,7 @@ const renderMission = ( mission : any ) => (
     getAllMissions();
   }, []);
 
+  const [selectedId, setSelectedId] = useState(null);
   const [itemMission , setItemMission] = useState([]);
 
   const getAllMissions = async () => {
@@ -42,7 +45,7 @@ const renderMission = ( mission : any ) => (
 
 
   return (
-  <SafeAreaView>
+  <View style={styles.view}>
   <Text>HOMESCREEN</Text>
       <ScrollView style={styles.scrollView}>
           <FlatList
@@ -52,7 +55,7 @@ const renderMission = ( mission : any ) => (
             extraData={setItemMission}
           />
       </ScrollView>
-  </SafeAreaView>
+  </View>
     
 
   )
@@ -63,6 +66,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+  },
+  view : {
+  backgroundColor : 'red'
   },
   scrollView: {
     backgroundColor: 'pink',

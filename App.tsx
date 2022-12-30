@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -17,20 +17,15 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-} from 'react-native/Libraries/NewAppScreen';
 import { MissionComp } from './src/components/organismes/Missions/Mission';
+
 import {HomeScreen} from './src/scenes/Home/HomeScreen';
 
 const App = () => {
 
   return (
     <SafeAreaView>
-      <Text> HI  </Text>
+      <Text style={styles.highlight}> APP  </Text>
       <HomeScreen></HomeScreen>
     </SafeAreaView>
   );
@@ -39,6 +34,7 @@ const App = () => {
 const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
+    color : 'red'
   },
 });
 

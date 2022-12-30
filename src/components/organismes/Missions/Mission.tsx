@@ -18,6 +18,9 @@ export interface Props {
   title: string;
   desc : string;
   price : number;
+ 
+	
+  
 
 }
 
@@ -27,13 +30,19 @@ export class MissionComp extends React.Component<Props> {
 
 	constructor(props: Props) {
     super(props);
+	this.onPressFunction = this.onPressFunction
 
     
   }
 
+  
+	onPressFunction = () => {
+		console.log("press")
+	}
+
   render() {
     return (
-	<Pressable style={styles.mission}>
+	<Pressable style={styles.mission} onPress={this.onPressFunction}>
 		<View style={styles.container}>
 			<Text style={styles.title}>
 			{this.props.title }
